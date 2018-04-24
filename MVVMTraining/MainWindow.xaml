@@ -1,0 +1,40 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMTraining"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:Customers="clr-namespace:MVVMTraining.Customers" x:Class="MVVMTraining.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type Customers:CustomerListViewModel}">
+            <Customers:CustomerListView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+            <!-- Content control require the resources to define the ui -->
+            <!-- <ContentControl Content="{Binding CurrentViewModel}" /> -->
+        <ContentControl>
+            <i:Interaction.Behaviors>
+                <local:ShowNotificationMessageBehavior Message="{Binding NotificationMessage}" />
+            </i:Interaction.Behaviors>
+        </ContentControl>
+        <!-- Content control require the resources to define the ui -->
+        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1" />
+            <!--
+            <Customers:CustomerDetailView Height="200" />
+        -->
+ 
+    </Grid>
+</Window>

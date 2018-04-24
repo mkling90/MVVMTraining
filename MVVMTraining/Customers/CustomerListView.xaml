@@ -1,0 +1,93 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cust="clr-namespace:MVVMTraining.Customers"
+             xmlns:local="clr-namespace:MVVMTraining"
+             xmlns:data="clr-namespace:Zza.Data;assembly=Zza.Data"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             x:Class="MVVMTraining.Customers.CustomerListView"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             local:ViewModelLocator.AutoWireViewModel="True">
+    <!--  local:MvvmBehaviors.LoadedMethodName="LoadCustomers" - not needed if using the Blend SDK version -->
+    <UserControl.Resources>
+        <!-- make sure to use xmlns:data to use data:-->
+        <DataTemplate DataType="{x:Type data:Customer}">
+            <!-- Explicit template:  x:Key="CustomerTemplate" instead of datatype-->
+            <StackPanel>
+                <TextBlock Text="{Binding FirstName}" />
+                <TextBlock Text="{Binding LastName}" />
+                <TextBlock Text="{Binding Phone}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <!--  <UserControl.DataContext>
+        <cust:CustomerListViewModel />
+    </UserControl.DataContext> -->
+    <!-- Map keyboard shortcuts to bindings  -->
+    <UserControl.InputBindings>
+        <KeyBinding Key="D"
+                    Modifiers="Ctrl"
+                    Command="{Binding DeleteCommand}"/>
+    </UserControl.InputBindings>
+    <!-- When you just do {Binding}, it means the entire datacontext object (viewmodel) -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="LoadCustomers"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- Command binds to method in viewmodel -->
+        <Button Content="Delete"
+                Command="{Binding DeleteCommand}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75"/>
+        <Button Content="Change Customer"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="80,0,0,0"
+                Width="100"
+                Click="Button_Click"/>
+        <!-- Bad to do the click event in mvvm, just to show the different possibility -->
+        <DataGrid x:Name="customerDataGrid" AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True"
+                  ItemsSource="{Binding Customers}"
+                  SelectedItem="{Binding SelectedCustomer}"
+                  Grid.Row="1"
+                  RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="firstNameColumn"
+                                    Binding="{Binding FirstName}"
+                                    Header="First Name"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="lastNameColumn"
+                                    Binding="{Binding LastName}"
+                                    Header="Last Name"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="phoneColumn"
+                                    Binding="{Binding Phone}"
+                                    Header="Phone"
+                                    Width="SizeToHeader"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <ListBox Grid.Row="1" Grid.Column="1"
+                 ItemsSource="{Binding Customers}"/>
+        <!--Explicit template:   ItemTemplate="{StaticResource CustomerTemplate}"  -->
+    </Grid>
+</UserControl>

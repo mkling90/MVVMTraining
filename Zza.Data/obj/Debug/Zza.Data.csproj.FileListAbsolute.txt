@@ -1,0 +1,11 @@
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\Zza.Data.dll.config
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\Zza.Data.dll
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\Zza.Data.pdb
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\EntityFramework.dll
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\EntityFramework.xml
+D:\Training Projects\MVVMTraining\Zza.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Training Projects\MVVMTraining\Zza.Data\obj\Debug\Zza.Data.csproj.CoreCompileInputs.cache
+D:\Training Projects\MVVMTraining\Zza.Data\obj\Debug\Zza.Data.dll
+D:\Training Projects\MVVMTraining\Zza.Data\obj\Debug\Zza.Data.pdb
+D:\Training Projects\MVVMTraining\Zza.Data\obj\Debug\Zza.Data.csprojResolveAssemblyReference.cache
